@@ -1,16 +1,16 @@
 package Main.Classes
 
-class GameState(private var gameSetting: GameSetting) {
+class GameState(var gameSetting: GameSetting) {
 
-    fun setSettings(gameType:GameType, friendlyFire:Boolean){
-        gameSetting = GameSetting(gameType,friendlyFire)
-    }
+    fun initializeGame() {
+        when(gameSetting.gameType) {
+            GameType.TURN_BASE -> {
 
-    fun initializeGame(){
-        if(gameSetting.gameType == GameType.TURN_BASE){
+            }
 
-        }else{
+            GameType.REAL_TIME -> {
 
+            }
         }
     }
 }
