@@ -21,19 +21,10 @@ fun testGame(){
         mainMenuSelection = scanner.nextInt()
 
         when(mainMenuSelection){
-            1 -> {
-                startGame(gameState, scanner)
-            }
-
-            2 -> {
-                modifySettings(gameState, scanner)
-            }
-            3 -> {
-                println("Bye Bye!")
-            }
-            else -> {
-                println("Please Select a valid Option!")
-            }
+            1 -> startGame(gameState, scanner)
+            2 -> modifySettings(gameState, scanner)
+            3 -> println("Bye Bye!")
+            else -> println("Please Select a valid Option!")
         }
     }while (mainMenuSelection != 3)
 }
@@ -49,22 +40,13 @@ fun modifySettings(gameState: GameState, scanner:Scanner){
                 "2- Change Friendly Fire\n" +
                 "3- Back")
 
-        var settingsSelection = scanner.nextInt()
+        val settingsSelection = scanner.nextInt()
 
         when(settingsSelection){
-            1 -> {
-                modifyGameType(gameState, scanner)
-            }
-
-            2 -> {
-                modifyFriendlyFire(gameState, scanner)
-            }
-            3 -> {
-                println("Bye Bye!")
-            }
-            else -> {
-                println("Please Select a valid Option!")
-            }
+            1 -> modifyGameType(gameState, scanner)
+            2 -> modifyFriendlyFire(gameState, scanner)
+            3 -> { }
+            else -> println("Please Select a valid Option!")
         }
     }while (settingsSelection != 3)
 }
@@ -76,24 +58,16 @@ fun modifyGameType(gameState: GameState, scanner:Scanner){
                 "2- Real-Time Game\n" +
                 "3- Back")
 
-        var settingsSelection = scanner.nextInt()
+        val settingsSelection = scanner.nextInt()
 
         when(settingsSelection){
-            1 -> {
-                gameState.gameSetting.gameType = GameType.TURN_BASE
-            }
+            1 -> gameState.gameSetting.gameType = GameType.TURN_BASE
 
-            2 -> {
-                gameState.gameSetting.gameType = GameType.REAL_TIME
-            }
-            3 -> {
-
-            }
-            else -> {
-                println("Please Select a valid Option!")
-            }
+            2 -> gameState.gameSetting.gameType = GameType.REAL_TIME
+            3 -> { }
+            else -> println("Please Select a valid Option!")
         }
-    }while (settingsSelection != 1 || settingsSelection != 2 || settingsSelection != 3)
+    }while (settingsSelection != 1 && settingsSelection != 2 && settingsSelection != 3)
 }
 
 fun modifyFriendlyFire(gameState: GameState, scanner:Scanner){
@@ -103,22 +77,13 @@ fun modifyFriendlyFire(gameState: GameState, scanner:Scanner){
                 "2- Disabled\n" +
                 "3- Back")
 
-        var settingsSelection = scanner.nextInt()
+        val settingsSelection = scanner.nextInt()
 
         when(settingsSelection){
-            1 -> {
-                gameState.gameSetting.friendlyFire = true
-            }
-
-            2 -> {
-                gameState.gameSetting.friendlyFire = false
-            }
-            3 -> {
-
-            }
-            else -> {
-                println("Please Select a valid Option!")
-            }
+            1 -> gameState.gameSetting.friendlyFire = true
+            2 -> gameState.gameSetting.friendlyFire = false
+            3 -> { }
+            else -> println("Please Select a valid Option!")
         }
-    }while (settingsSelection != 1 || settingsSelection != 2 || settingsSelection != 3)
+    } while (settingsSelection != 1 && settingsSelection != 2 && settingsSelection != 3)
 }
