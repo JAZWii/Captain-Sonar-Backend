@@ -1,4 +1,4 @@
-package Main.Classes
+package main.classes
 
 enum class GameType {
     TURN_BASE,

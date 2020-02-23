@@ -1,9 +1,7 @@
 package com.speda
 
-import Test.testGame
+import test.testGame
 import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.request.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 

@@ -1,8 +1,9 @@
-package Test
+package test
 
-import Main.Classes.GameSetting
-import Main.Classes.GameState
-import Main.Classes.GameType
+import main.classes.GameSetting
+import main.classes.GameState
+import main.classes.GameType
+import main.classes.Submarine
 import java.util.*
 
 fun testGame(){
@@ -30,6 +31,11 @@ fun testGame(){
 }
 
 fun startGame(gameState: GameState, scanner:Scanner){
+    gameState.initializeGame()
+    val yellowSubmarine = Submarine()
+    val blueSubmarine = Submarine()
+    yellowSubmarine.firstMateRoom.initializeFirstMateRoom(gameState.gameSetting)
+    blueSubmarine.firstMateRoom.initializeFirstMateRoom(gameState.gameSetting)
 
 }
 
@@ -76,7 +82,6 @@ fun modifyFriendlyFire(gameState: GameState, scanner:Scanner){
                 "1- Enabled\n" +
                 "2- Disabled\n" +
                 "3- Back")
-
         val settingsSelection = scanner.nextInt()
 
         when(settingsSelection){
