@@ -1,9 +1,6 @@
 package test
 
-import main.classes.GameSetting
-import main.classes.GameState
-import main.classes.GameType
-import main.classes.Submarine
+import com.speda.*
 import java.util.*
 
 fun testGame(){
@@ -27,17 +24,40 @@ fun testGame(){
             3 -> println("Bye Bye!")
             else -> println("Please Select a valid Option!")
         }
-    }while (mainMenuSelection != 3)
+    } while (mainMenuSelection != 1 && mainMenuSelection != 3)
 }
 
 fun startGame(gameState: GameState, scanner:Scanner){
-    gameState.initializeGame()
-    val yellowSubmarine = Submarine()
-    val blueSubmarine = Submarine()
-    yellowSubmarine.firstMateRoom.initializeFirstMateRoom(gameState.gameSetting)
-    blueSubmarine.firstMateRoom.initializeFirstMateRoom(gameState.gameSetting)
-
+    val yellowInitialPoint = getCoordinatesFor("Yellow ship", scanner)
+    val blueInitialPoint = getCoordinatesFor("Yellow ship", scanner)
+    val yellowSubmarine = Submarine(gameState.gameSetting, yellowInitialPoint)
+    val blueSubmarine = Submarine(gameState.gameSetting, blueInitialPoint)
+    drawGameBoard(gameState, yellowSubmarine, blueSubmarine)
 }
+
+
+// Ui = function(state)
+fun drawGameBoard(gameState: GameState, yellowSubmarine: Submarine, blueSubmarine: Submarine) {
+
+    println("=".repeat(gameState.boardGame.size * 3 + 2))
+
+    for(row in gameState.boardGame){
+        print("|")
+        for(seaSpace in row){
+            val cell = when (seaSpace) {
+                yellowSubmarine.currentSeaSpace -> "Y"
+                blueSubmarine.currentSeaSpace -> "B"
+                else -> " "
+            }
+
+            print(" $cell ")
+        }
+        print("|\n")
+    }
+
+    println("=".repeat(gameState.boardGame.size * 3 + 2))
+}
+
 
 fun modifySettings(gameState: GameState, scanner:Scanner){
     do {
@@ -54,7 +74,7 @@ fun modifySettings(gameState: GameState, scanner:Scanner){
             3 -> { }
             else -> println("Please Select a valid Option!")
         }
-    }while (settingsSelection != 3)
+    } while (settingsSelection != 3)
 }
 
 fun modifyGameType(gameState: GameState, scanner:Scanner){
@@ -91,4 +111,19 @@ fun modifyFriendlyFire(gameState: GameState, scanner:Scanner){
             else -> println("Please Select a valid Option!")
         }
     } while (settingsSelection != 1 && settingsSelection != 2 && settingsSelection != 3)
+}
+
+
+fun getCoordinatesFor(name: String, scanner: Scanner): SeaSpace {
+    print("Enter coordinates for $name [x, y] > ")
+
+    val coordinatesRegex: Regex = Regex("""\d+[,\s]+\d+""")
+    val splitRegex: Regex = Regex("""[,\s]+""")
+    while (!scanner.hasNext(coordinatesRegex.pattern)){
+        scanner.nextLine()
+        print("Invalid coordinates!! Try again [x, y] > ")
+    }
+    val line = scanner.next(coordinatesRegex.pattern)
+    val input = line.split(splitRegex)
+    return SeaSpace(input[0].toInt(), input[1].toInt())
 }

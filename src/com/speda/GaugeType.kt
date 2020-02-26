@@ -1,4 +1,4 @@
-package main.classes
+package com.speda
 
 enum class GaugeType {
     WEAPON_SYSTEM,
