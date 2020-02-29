@@ -1,4 +1,4 @@
-package com.speda.server
+package com.speda.captain.sonar.server
 
 import com.smartfoxserver.v2.core.SFSEventType
 import com.smartfoxserver.v2.extensions.SFSExtension

@@ -23,10 +23,23 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
-val copyDist = tasks.register<Copy>("copyDist") {
-    from(file("$buildDir/install"))
+val copyLibraries = tasks.register<Copy>("copyLibraries") {
+    from(file("$buildDir/install/${project.name}/lib/"))
+    into(file("$sfs2xPath/extensions/__lib__/"))
+    dependsOn("installDist")
+}
+
+val copyExtension = tasks.register<Copy>("copyExtension") {
+    from(file("$buildDir/install")) {
+        exclude("${project.name}/lib")
+    }
     into(file("$sfs2xPath/extensions"))
     dependsOn("installDist")
+}
+
+val buildExtension = tasks.create("buildExtension") {
+    group = "build"
+    dependsOn("copyExtension", "copyLibraries")
 }
 
 tasks {
@@ -35,8 +48,5 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
-    }
-    build{
-        dependsOn("copyDist")
     }
 }

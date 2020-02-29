@@ -1,4 +1,9 @@
-package com.speda
+package com.speda.captain.sonar.game.role
+
+import com.speda.captain.sonar.game.model.CardinalDirection
+import com.speda.captain.sonar.game.board.GameSetting
+import com.speda.captain.sonar.game.submarine.SubmarineSystem
+import com.speda.captain.sonar.game.model.*
 
 class EngineerRoom(gameSetting: GameSetting) {
     val panels = mutableListOf<ControlPanel>()

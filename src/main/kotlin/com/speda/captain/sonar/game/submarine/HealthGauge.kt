@@ -1,4 +1,6 @@
-package com.speda
+package com.speda.captain.sonar.game.submarine
+
+import com.speda.captain.sonar.game.model.Gauge
 
 class HealthGauge(max: Int = 4) : Gauge(max) {
 

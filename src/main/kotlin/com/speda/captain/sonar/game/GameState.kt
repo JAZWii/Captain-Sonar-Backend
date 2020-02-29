@@ -1,4 +1,8 @@
-package com.speda
+package com.speda.captain.sonar.game
+
+import com.speda.captain.sonar.game.board.SeaSpace
+import com.speda.captain.sonar.game.board.GameSetting
+import com.speda.captain.sonar.game.board.GameType
 
 class GameState(var gameSetting: GameSetting) {
     val boardGame: Array<Array<SeaSpace>>

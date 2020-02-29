@@ -1,4 +1,4 @@
-package com.speda
+package com.speda.captain.sonar.game.submarine
 
 enum class SubmarineSystem {
     WEAPON,

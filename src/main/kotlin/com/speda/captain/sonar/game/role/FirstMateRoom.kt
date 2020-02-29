@@ -1,7 +1,10 @@
-package com.speda
+package com.speda.captain.sonar.game.role
+
+import com.speda.captain.sonar.game.board.GameSetting
+import com.speda.captain.sonar.game.board.GameType
+import com.speda.captain.sonar.game.submarine.SubmarineSystem
 
 class FirstMateRoom(gameSetting: GameSetting) {
-    val health: HealthGauge
     val mine: SystemGauge
     val torpedo: SystemGauge
     val drone: SystemGauge
@@ -10,10 +13,9 @@ class FirstMateRoom(gameSetting: GameSetting) {
     val scenario: SystemGauge
 
     init {
-        when(gameSetting.gameType) {
+        when (gameSetting.gameType) {
 
             GameType.TURN_BASE -> {
-                health = HealthGauge()
                 mine = SystemGauge(2, SubmarineSystem.WEAPON)
                 torpedo = SystemGauge(3, SubmarineSystem.WEAPON)
                 drone = SystemGauge(3, SubmarineSystem.DETECTION)
@@ -23,7 +25,6 @@ class FirstMateRoom(gameSetting: GameSetting) {
             }
 
             GameType.REAL_TIME -> {
-                health = HealthGauge()
                 mine = SystemGauge(3, SubmarineSystem.WEAPON)
                 torpedo = SystemGauge(3, SubmarineSystem.WEAPON)
                 drone = SystemGauge(4, SubmarineSystem.DETECTION)

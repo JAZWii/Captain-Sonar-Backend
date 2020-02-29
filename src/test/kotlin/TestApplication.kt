@@ -1,9 +1,13 @@
 package test
 
-import com.speda.*
+import com.speda.captain.sonar.game.GameState
+import com.speda.captain.sonar.game.board.GameSetting
+import com.speda.captain.sonar.game.board.GameType
+import com.speda.captain.sonar.game.board.SeaSpace
+import com.speda.captain.sonar.game.submarine.Submarine
 import java.util.*
 
-fun testGame(){
+fun main(){
     val gameSetting = GameSetting(GameType.TURN_BASE, true)
     val gameState = GameState(gameSetting)
 

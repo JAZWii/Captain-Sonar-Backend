@@ -1,7 +1,14 @@
-package com.speda
+package com.speda.captain.sonar.game.submarine
+
+import com.speda.captain.sonar.game.board.Mine
+import com.speda.captain.sonar.game.board.SeaSpace
+import com.speda.captain.sonar.game.model.CardinalDirection
+import com.speda.captain.sonar.game.board.GameSetting
+import com.speda.captain.sonar.game.role.EngineerRoom
+import com.speda.captain.sonar.game.role.FirstMateRoom
 
 class Submarine (private val gameSetting: GameSetting, var currentSeaSpace: SeaSpace) {
-    var health = 4
+    val health = HealthGauge()
     val firstMateRoom = FirstMateRoom(gameSetting)
     val engineerRoom = EngineerRoom(gameSetting)
     val mines = mutableListOf<Mine>()
@@ -23,7 +30,7 @@ class Submarine (private val gameSetting: GameSetting, var currentSeaSpace: SeaS
 
     private fun getAdjacentSpace(direction: CardinalDirection): SeaSpace {
         // TODO("not implemented")
-        return SeaSpace(0,0)
+        return SeaSpace(0, 0)
     }
 
     private fun isValid(direction: CardinalDirection): Boolean {
