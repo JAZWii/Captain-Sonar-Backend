@@ -31,14 +31,43 @@ fun main(){
     } while (mainMenuSelection != 1 && mainMenuSelection != 3)
 }
 
-fun startGame(gameState: GameState, scanner:Scanner){
+fun startGame(gameState: GameState, scanner:Scanner) {
     val yellowInitialPoint = getCoordinatesFor("Yellow ship", scanner)
-    val blueInitialPoint = getCoordinatesFor("Yellow ship", scanner)
+    val blueInitialPoint = getCoordinatesFor("Blue ship", scanner)
     val yellowSubmarine = Submarine(gameState.gameSetting, yellowInitialPoint)
     val blueSubmarine = Submarine(gameState.gameSetting, blueInitialPoint)
     drawGameBoard(gameState, yellowSubmarine, blueSubmarine)
+
+    while (!yellowSubmarine.health.isDead && !blueSubmarine.health.isDead) {
+        println("Yellow Submarine's Turn")
+        gameTurn(gameState, yellowSubmarine, blueSubmarine, scanner)
+        println("Blue Submarine's Turn")
+        gameTurn(gameState, blueSubmarine, yellowSubmarine, scanner)
+    }
 }
 
+fun gameTurn(gameState: GameState, currentSubmarine: Submarine, enemySubmarine: Submarine ,scanner:Scanner) {
+    var selectedAction:Int
+    do {
+        currentSubmarine.showAdjacentSpaces()
+        selectedAction = currentSubmarine.showActions(scanner)
+
+        when(selectedAction) {
+            1 -> if (currentSubmarine.canMove) currentSubmarine.chooseDirection(scanner) else println("You can't move")//Move
+            2 -> currentSubmarine.showAdjacentSpaces()//place a Mine
+            3 -> currentSubmarine.showAdjacentSpaces()//Fire a Torpedo
+            4 -> currentSubmarine.showAdjacentSpaces()//Use Drone
+            5 -> currentSubmarine.showAdjacentSpaces()//Use Sonar
+            6 -> currentSubmarine.showAdjacentSpaces()//Use Silence
+            7 -> currentSubmarine.showAdjacentSpaces()//Use Scenario
+            9 -> currentSubmarine.showAdjacentSpaces()//End your turn
+            0 -> currentSubmarine.showAdjacentSpaces()//Surface
+            else -> println("Invalid Selected Action!")
+        }
+
+    }while (selectedAction != 0 || selectedAction != 9)
+    currentSubmarine.canMove = true;
+}
 
 // Ui = function(state)
 fun drawGameBoard(gameState: GameState, yellowSubmarine: Submarine, blueSubmarine: Submarine) {
@@ -61,7 +90,6 @@ fun drawGameBoard(gameState: GameState, yellowSubmarine: Submarine, blueSubmarin
 
     println("=".repeat(gameState.boardGame.size * 3 + 2))
 }
-
 
 fun modifySettings(gameState: GameState, scanner:Scanner){
     do {
@@ -116,7 +144,6 @@ fun modifyFriendlyFire(gameState: GameState, scanner:Scanner){
         }
     } while (settingsSelection != 1 && settingsSelection != 2 && settingsSelection != 3)
 }
-
 
 fun getCoordinatesFor(name: String, scanner: Scanner): SeaSpace {
     print("Enter coordinates for $name [x, y] > ")

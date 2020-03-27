@@ -54,10 +54,13 @@ class EngineerRoom(gameSetting: GameSetting) {
             add(Breakdown.System(SubmarineSystem.DETECTION))
             add(Breakdown.Reactor())
         }.also { panels.add(it) }
+    }
 
-
-
-
-
+    fun isAvailable(system: SubmarineSystem) : Boolean {
+        return panels.all { panel ->
+            panel.breakdowns
+                .filter { it is Breakdown.System && it.type == system }
+                .none { it.crossed }
+        }
     }
 }
