@@ -65,7 +65,7 @@ fun gameTurn(gameState: GameState, currentSubmarine: Submarine, enemySubmarine: 
             else -> println("Invalid Selected Action!")
         }
 
-    }while (selectedAction != 0 || selectedAction != 9)
+    }while (selectedAction != 0 && selectedAction != 9)
     currentSubmarine.canMove = true;
 }
 

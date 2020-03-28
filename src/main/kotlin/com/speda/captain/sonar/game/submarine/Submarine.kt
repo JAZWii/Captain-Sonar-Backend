@@ -72,6 +72,7 @@ class Submarine (private val gameSetting: GameSetting, var currentSeaSpace: SeaS
         } while (!isValid(direction))
         moveTo(direction)
         println("The Submarine has moved to $direction")
+        canMove = false;
     }
 
     fun showAdjacentSpaces() {
